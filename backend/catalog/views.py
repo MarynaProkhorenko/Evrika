@@ -56,7 +56,7 @@ class CourseViewSet(
         if school_subject:
             queryset = queryset.filter(school_subject=bool(school_subject))
 
-        return queryset
+        return queryset.distinct()
 
     def get_serializer_class(self) -> Type[Serializer]:
         if self.action == "list":
@@ -66,6 +66,7 @@ class CourseViewSet(
 
 
 class OrderViewSet(
+    mixins.ListModelMixin,
     mixins.CreateModelMixin,
     GenericViewSet,
 ):

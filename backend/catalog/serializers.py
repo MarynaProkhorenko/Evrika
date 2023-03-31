@@ -31,7 +31,7 @@ class CourseListSerializer(CourseSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    courses = CourseSerializer(many=True, read_only=True)
+    courses = CourseSerializer(many=True, read_only=True, allow_empty=False)
 
     class Meta:
         model = Order
