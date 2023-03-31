@@ -12,7 +12,7 @@ from rest_framework.viewsets import GenericViewSet
 from catalog.models import Course, Order
 from catalog.serializers import CourseSerializer, CourseListSerializer, OrderSerializer
 
-from backend.catalog.serializers import CourseImageSerializer
+from catalog.serializers import CourseImageSerializer
 
 
 class CoursePagination(PageNumberPagination):
@@ -21,7 +21,6 @@ class CoursePagination(PageNumberPagination):
 
 
 class CourseViewSet(
-    mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     GenericViewSet,
 ):
@@ -72,7 +71,7 @@ class CourseViewSet(
         return CourseSerializer
 
     @action(
-        method=["POST"],
+        methods=["POST"],
         detail=True,
         url_path="upload-image",
         permission_classes=[IsAdminUser]
