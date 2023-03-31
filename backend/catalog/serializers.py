@@ -30,6 +30,12 @@ class CourseListSerializer(CourseSerializer):
         )
 
 
+class CourseImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ("id", "image")
+
+
 class OrderSerializer(serializers.ModelSerializer):
     courses = CourseSerializer(many=True, read_only=True, allow_empty=False)
 

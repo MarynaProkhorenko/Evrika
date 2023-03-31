@@ -1,7 +1,18 @@
+import os
+import uuid
+
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 from django.conf import settings
+from django.utils.text import slugify
+
+
+def movie_image_file_path(instance, filename) -> str:
+    _, extension = os.path.splitext(filename)
+    filename = f"{slugify(instance.title)}-{uuid.uuid4()}{extension}"
+
+    return os.path.join("uploads/courses/", filename)
 
 
 class Course(models.Model):
@@ -14,6 +25,7 @@ class Course(models.Model):
     )
     price = models.IntegerField()
     school_subject = models.BooleanField()
+    image = models.ImageField(null=True, upload_to=movie_image_file_path)
 
     def __str__(self) -> str:
         return f"{self.title}( {self.age_of_pupils} years, {self.duration} month)"
