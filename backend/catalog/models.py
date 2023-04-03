@@ -52,3 +52,7 @@ class Order(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+
+    def save(self, *args, **kwargs):
+        self.total_cost = sum(course.price for course in self.courses.all())
+        super().save(*args, **kwargs)
