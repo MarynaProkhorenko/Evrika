@@ -23,13 +23,13 @@ class CoursePagination(PageNumberPagination):
 
 
 class CourseViewSet(
-    mixins.CreateModelMixin,
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     GenericViewSet,
 ):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+
     pagination_class = CoursePagination
 
     @staticmethod
