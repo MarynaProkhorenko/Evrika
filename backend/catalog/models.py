@@ -23,7 +23,11 @@ class Course(models.Model):
     age_of_pupils = models.IntegerField(
         validators=[MinValueValidator(7), MaxValueValidator(18)]
     )
-    price = models.IntegerField()
+    price = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        default=0
+    )
     school_subject = models.BooleanField()
     image = models.ImageField(null=True, upload_to=movie_image_file_path)
 
@@ -37,7 +41,11 @@ class Order(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
-    total_coast = models.IntegerField()
+    total_coast = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
 
     def __str__(self) -> str:
         return str(self.created_at)
