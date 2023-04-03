@@ -1,5 +1,7 @@
 from typing import Type
 
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import viewsets, mixins, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
@@ -21,6 +23,8 @@ class CoursePagination(PageNumberPagination):
 
 
 class CourseViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     GenericViewSet,
 ):
@@ -61,6 +65,37 @@ class CourseViewSet(
 
         return queryset.distinct()
 
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name="title",
+                type={"type": "list", "items": {"type": "str"}},
+                description="Filter by title",
+                required=False,
+            ),
+            OpenApiParameter(
+                name="duration",
+                type={"type": "list", "items": {"type": "number"}},
+                description="Filter by duration",
+                required=False,
+            ),
+            OpenApiParameter(
+                name="age_of_pupils",
+                type={"type": "list", "items": {"type": "number"}},
+                description="Filter by age_of_pupils",
+                required=False,
+            ),
+            OpenApiParameter(
+                name="school_subject",
+                type=OpenApiTypes.BOOL,
+                description="Filter by school_subject",
+                required=False,
+            )
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
     def get_serializer_class(self) -> Type[Serializer]:
         if self.action == "list":
             return CourseListSerializer
@@ -76,7 +111,7 @@ class CourseViewSet(
         url_path="upload-image",
         permission_classes=[IsAdminUser]
     )
-    def upload_image(self,request,pk=None):
+    def upload_image(self, request, pk=None):
         course = self.get_object()
         serializer = self.get_serializer(course, data=request.data)
 
@@ -96,7 +131,6 @@ class OrderViewSet(
         "courses"
     )
     serializer_class = OrderSerializer
-    authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
