@@ -42,7 +42,7 @@ class Order(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
     total_coast = models.DecimalField(
-        max_digits=10,
+        max_digits=6,
         decimal_places=2,
         default=0
     )
@@ -53,6 +53,9 @@ class Order(models.Model):
     class Meta:
         ordering = ["-created_at"]
 
-    def save(self, *args, **kwargs):
-        self.total_cost = sum(course.price for course in self.courses.all())
-        super().save(*args, **kwargs)
+    @property
+    def total_price(self):
+        total = 0
+        for course in self.courses.all():
+            total += course.price
+        return total

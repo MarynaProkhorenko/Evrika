@@ -123,7 +123,6 @@ class CourseViewSet(
 
 
 class OrderViewSet(
-    mixins.ListModelMixin,
     mixins.CreateModelMixin,
     GenericViewSet,
 ):
@@ -138,14 +137,3 @@ class OrderViewSet(
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-
-    @action(detail=True, methods=["post"])
-    def make_payment(self, request, pk=None):
-        order = self.get_object()
-        total_cost = order.total_cost
-        return Response(
-            {
-                "message":
-                    f"Payment created for order {order.id} with total cost of {total_cost}"
-            }
-        )
