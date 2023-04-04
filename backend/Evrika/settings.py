@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-)538j08lcuy6omu*=jp5$k68-o4*zj!yyomcl=wm3tz#-+gfx+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "evrika.onrender.com"]
 
 
 # Application definition
