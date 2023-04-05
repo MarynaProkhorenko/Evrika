@@ -136,4 +136,6 @@ class OrderViewSet(
         return Order.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        order = serializer.save(user=self.request.user)
+        order.total_cost = order.total_price
+        order.save()
