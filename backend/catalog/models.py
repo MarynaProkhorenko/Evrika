@@ -41,7 +41,7 @@ class Order(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
-    total_coast = models.DecimalField(
+    total_cost = models.DecimalField(
         max_digits=6,
         decimal_places=2,
         default=0
