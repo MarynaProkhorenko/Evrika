@@ -1,9 +1,9 @@
-from typing import Type
+from typing import Type, List
 
+from django.db.models import QuerySet
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema, OpenApiParameter
-from rest_framework import viewsets, mixins, status
-from rest_framework.authentication import TokenAuthentication
+from rest_framework import mixins, status
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -33,14 +33,14 @@ class CourseViewSet(
     pagination_class = CoursePagination
 
     @staticmethod
-    def _params_to_list(qs):
+    def _params_to_list(qs) -> List[str]:
         return [param for param in qs.split(",")]
 
     @staticmethod
-    def _params_to_ints(qs):
+    def _params_to_ints(qs) -> List[int]:
         return [int(str_num) for str_num in qs.split(",")]
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         title = self.request.query_params.get("title")
         duration = self.request.query_params.get("duration")
         age_of_pupils = self.request.query_params.get("age_of_pupils")
@@ -111,7 +111,7 @@ class CourseViewSet(
         url_path="upload-image",
         permission_classes=[IsAdminUser]
     )
-    def upload_image(self, request, pk=None):
+    def upload_image(self, request, pk=None) -> Response:
         course = self.get_object()
         serializer = self.get_serializer(course, data=request.data)
 
@@ -132,10 +132,10 @@ class OrderViewSet(
     serializer_class = OrderSerializer
     permission_classes = (IsAuthenticated,)
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         return Order.objects.filter(user=self.request.user)
 
-    def perform_create(self, serializer):
+    def perform_create(self, serializer) -> None:
         order = serializer.save(user=self.request.user)
         order.total_cost = order.total_price
         order.save()

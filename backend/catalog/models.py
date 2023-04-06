@@ -54,7 +54,7 @@ class Order(models.Model):
         ordering = ["-created_at"]
 
     @property
-    def total_price(self):
+    def total_price(self) -> int:
         total = 0
         for course in self.courses.all():
             total += course.price
