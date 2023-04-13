@@ -1,6 +1,10 @@
 from django.test import TestCase
-from catalog.models import Course, Order
-from catalog.serializers import CourseSerializer, CourseListSerializer, CourseImageSerializer, OrderSerializer
+from catalog.models import Course
+from catalog.serializers import (
+    CourseSerializer,
+    CourseListSerializer,
+    CourseImageSerializer,
+)
 
 
 class CourseSerializerTestCase(TestCase):
@@ -51,7 +55,9 @@ class CourseListSerializerTestCase(TestCase):
 
     def test_contains_expected_fields(self):
         data = self.serializer.data
-        self.assertCountEqual(data.keys(), ["id", "title", "duration", "age_of_pupils", "price"])
+        self.assertCountEqual(data.keys(), [
+            "id", "title", "duration", "age_of_pupils", "price"
+        ])
 
     def test_title_field_content(self):
         data = self.serializer.data
