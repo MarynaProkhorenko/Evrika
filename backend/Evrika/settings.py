@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-)538j08lcuy6omu*=jp5$k68-o4*zj!yyomcl=wm3tz#-+gfx+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "evrika.onrender.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "evrika-rpkv.onrender.com"]
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "corsheaders",
     "drf_spectacular",
     "catalog",
     "user"
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -122,7 +124,7 @@ AUTH_USER_MODEL = "user.User"
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Kiev"
 
 USE_I18N = True
 
@@ -170,3 +172,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": True,
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "https://andriimelnyq.github.io/evrika-app ",
+]

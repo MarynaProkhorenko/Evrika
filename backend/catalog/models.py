@@ -41,7 +41,7 @@ class Order(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
-    total_coast = models.DecimalField(
+    total_cost = models.DecimalField(
         max_digits=6,
         decimal_places=2,
         default=0
@@ -54,7 +54,7 @@ class Order(models.Model):
         ordering = ["-created_at"]
 
     @property
-    def total_price(self):
+    def total_price(self) -> int:
         total = 0
         for course in self.courses.all():
             total += course.price
