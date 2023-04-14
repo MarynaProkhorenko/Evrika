@@ -174,5 +174,5 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "https://andriimelnyq.github.io/evrika-app ",
+    "https://andriimelnyq.github.io/evrika-app/",
 ]
