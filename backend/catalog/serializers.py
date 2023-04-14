@@ -14,7 +14,8 @@ class CourseSerializer(serializers.ModelSerializer):
             "duration",
             "age_of_pupils",
             "price",
-            "school_subject"
+            "school_subject",
+            "image",
         )
 
 
@@ -27,6 +28,7 @@ class CourseListSerializer(CourseSerializer):
             "duration",
             "age_of_pupils",
             "price",
+            "image",
         )
 
 
