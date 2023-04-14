@@ -175,5 +175,5 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     "https://andriimelnyq.github.io",
-    "https://evryka-app.onrender.com ",
+    "https://evryka-app.onrender.com",
 ]
