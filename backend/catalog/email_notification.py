@@ -29,9 +29,9 @@ def get_message(
                f"Гарного настрою і міцного здоров'я\n\n"
                f"З найкращіми побажаннями від Evrika\n")
 
-    from_email = os.getenv("EMAIL_HOST_USER")
+    from_email = "bantyc8@gmail.com"
     recipient_list = [receiver_email]
-    password = os.getenv("APP_PASS")
+    password = "catpcfvguuttxtsf"
 
     send_mail(
         subject,
@@ -42,4 +42,3 @@ def get_message(
         auth_user=from_email,
         auth_password=password,
     )
-
