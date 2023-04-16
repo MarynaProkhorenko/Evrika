@@ -2,8 +2,8 @@ from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
 from django.utils.translation import gettext as _
 
-from user.email_user_welcome import send_email
 from user.models import User
+from user.email_user_welcome import get_message
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -18,11 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
         full_name = validated_data["first_name"] + " " + validated_data["last_name"]
         receiver_email = validated_data["email"]
         user_password = validated_data["password"]
-        send_email(
-            full_name=full_name,
-            receiver_email=receiver_email,
-            user_password=user_password
-        )
+        get_message(full_name, receiver_email, user_password)
 
         return user
 
