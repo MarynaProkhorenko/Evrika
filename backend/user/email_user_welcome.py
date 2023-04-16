@@ -19,8 +19,8 @@ def get_message(full_name: str, receiver_email: str, user_password: str) -> None
                f"Бажаємо вашим дітьям найлегшого вдосконалення своїх навичок\n"
                f"Розвитку та досягнення нових висот\n")
 
-    from_email = os.getenv("EMAIL_HOST_USER")
-    password = os.getenv("APP_PASS")
+    from_email = "bantyc8@gmail.com"
+    password = "catpcfvguuttxtsf"
     recipient_list = [receiver_email]
 
     send_mail(
