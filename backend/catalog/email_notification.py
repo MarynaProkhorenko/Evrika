@@ -28,8 +28,18 @@ def get_message(
                f"Бажаємо вашій дитині гарної освіти,\n"
                f"Гарного настрою і міцного здоров'я\n\n"
                f"З найкращіми побажаннями від Evrika\n")
+
     from_email = os.getenv("EMAIL_HOST_USER")
     recipient_list = [receiver_email]
+    password = os.getenv("EMAIL_HOST_PASSWORD")
 
-    send_mail(subject, message, from_email,
-              recipient_list, fail_silently=False)
+    send_mail(
+        subject,
+        message,
+        from_email,
+        recipient_list,
+        fail_silently=False,
+        auth_user=from_email,
+        auth_password=password,
+    )
+
