@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 from rest_framework.viewsets import GenericViewSet
 
+from catalog.email_notification import send_email
 from catalog.models import Course, Order
 from catalog.serializers import CourseSerializer, CourseListSerializer, OrderSerializer
 
@@ -139,3 +140,10 @@ class OrderViewSet(
         order = serializer.save(user=self.request.user)
         order.total_cost = order.total_price
         order.save()
+
+        courses = ',\n '.join([str(course) for course in order.courses.all()])
+        full_name = order.user.first_name + " " + order.user.last_name
+        total_cost = order.total_cost
+        receiver_email = order.user.email
+
+        send_email(courses, full_name, total_cost, receiver_email)
