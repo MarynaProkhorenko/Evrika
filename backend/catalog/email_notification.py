@@ -31,7 +31,7 @@ def get_message(
 
     from_email = os.getenv("EMAIL_HOST_USER")
     recipient_list = [receiver_email]
-    password = os.getenv("EMAIL_HOST_PASSWORD")
+    password = os.getenv("APP_PASS")
 
     send_mail(
         subject,

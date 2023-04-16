@@ -185,3 +185,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")  # Replace with your Gmail email address
 EMAIL_HOST_PASSWORD = os.getenv("APP_PASS")  # Replace with your Gmail email password
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
+SERVER_EMAIL = os.getenv("EMAIL_HOST_USER")
