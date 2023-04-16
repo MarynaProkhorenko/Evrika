@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
 from django.utils.translation import gettext as _
 
+from user.email_user_welcome import send_email
 from user.models import User
 
 
@@ -13,7 +14,17 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {"password": {"write_only": True, "min_length": 5}}
 
     def create(self, validated_data) -> User:
-        return get_user_model().objects.create_user(**validated_data)
+        user = get_user_model().objects.create_user(**validated_data)
+        full_name = validated_data["first_name"] + " " + validated_data["last_name"]
+        receiver_email = validated_data["email"]
+        user_password = validated_data["password"]
+        send_email(
+            full_name=full_name,
+            receiver_email=receiver_email,
+            user_password=user_password
+        )
+
+        return user
 
 
 class AuthTokenSerializer(serializers.Serializer):
