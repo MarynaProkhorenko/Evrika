@@ -62,7 +62,10 @@ class CourseViewSet(
             queryset = queryset.filter(age_of_pupils__in=ages)
 
         if school_subject:
-            queryset = queryset.filter(school_subject=bool(school_subject))
+            if school_subject == "true":
+                queryset = queryset.filter(school_subject=True)
+            elif school_subject == "false":
+                queryset = queryset.filter(school_subject=False)
 
         return queryset.distinct()
 
