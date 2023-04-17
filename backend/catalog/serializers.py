@@ -27,6 +27,7 @@ class CourseListSerializer(CourseSerializer):
             "title",
             "duration",
             "age_of_pupils",
+            "school_subject",
             "price",
             "image",
         )
