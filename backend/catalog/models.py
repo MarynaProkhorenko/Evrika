@@ -30,6 +30,7 @@ class Course(models.Model):
     )
     school_subject = models.BooleanField()
     image = models.ImageField(null=True, upload_to=movie_image_file_path)
+    image_url = models.URLField(blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.title}( {self.age_of_pupils} years, {self.duration} month)"
